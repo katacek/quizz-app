@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "build": "cd backend && npm i && npm run build && cd ../frontend && npm install && npm run build",
+        "build": "cd backend && npm i && npm run build",
         "start": "cd backend && npm run start"
     }
 }
