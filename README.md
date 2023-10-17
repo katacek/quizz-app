@@ -4,11 +4,11 @@ Quizz app testing Taekwondo knowledge (questions being generated using ChatGPT ð
 
 > BE: nest.js, postgres
 > FE: next.js
+> deployed to heroku: https://quiz-game-app-a7d6f779e403.herokuapp.com/
 
 Todo's
 - admin part for inserting new questions
 - design of the game, handling wrong answers, counting time
-- deploy to vercel (?): would require script to run be and fe, secrets, db in cloud
 
 Showcase below
 
