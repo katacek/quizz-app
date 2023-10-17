@@ -108,12 +108,11 @@ a {
 }
 
 .main {
-  padding: 20rem 6rem;
+  max-width: 500px;
+  margin: 150px auto;
   min-height: 100vh;
 }
 
 .center {
   text-align: center;
-  margin: auto;
 }
-

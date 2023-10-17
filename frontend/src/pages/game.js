@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import arrayShuffle from "array-shuffle";
-import { Button } from "react-bootstrap";
+import { Button, Toast, ToastContainer } from "react-bootstrap";
 import styled from "styled-components";
 
 import Question from "../components/question";
@@ -19,6 +19,9 @@ export default function Game() {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [rightAnswers, setRightAnswers] = useState(0);
     const [loading, setLoading] = useState(true)
+    const [showErrorToast, setShowErrorToast] = useState(false);
+    const [showSuccessToast, setShowSuccessToast] = useState(false);
+
     const numberOfQuestions = 5;
 
     // get questions from db
@@ -66,15 +69,17 @@ export default function Game() {
         setPickedQuestions(getQuestions());
         setSelectedIndex(0);
         setRightAnswers(0);
+        setShowSuccessToast(false);
+        setShowErrorToast(false);
     }
 
     const answerClicked = (index) => {
         const question = pickedQuestions[selectedIndex];
         if (question?.answers[index]?.correct) {
             setRightAnswers(rightAnswers+1);
+            setShowSuccessToast(true);
         } else {
-            // incorrect answer warning todo
-            // alert('error in answerClicked');
+            setShowErrorToast(true);
         }
         setSelectedIndex(selectedIndex+1)
     }
@@ -89,12 +94,60 @@ export default function Game() {
                         <div>
                             {selectedIndex < numberOfQuestions
                                 ? 
-                                <>
-                                    <CounterWrapper>Question {selectedIndex + 1} / {numberOfQuestions}</CounterWrapper>
-                                    <Question
-                                        individualQuestion={pickedQuestions[selectedIndex] || {}}
-                                        answerClicked={answerClicked} />
-                                </>
+                                <div>
+                                    <ToastContainer
+                                        className="p-3"
+                                        position="top-center"
+                                        style={{ zIndex: 1 }}
+                                    >
+                                    <Toast 
+                                        onClose={() => setShowErrorToast(false)} 
+                                        show={showErrorToast} 
+                                        delay={1000} 
+                                        bg="danger"
+                                        autohide
+                                        >
+                                        <Toast.Header>
+                                            <img
+                                            src="flight.png"
+                                            className="rounded me-2"
+                                            alt=""
+                                            width="50"
+                                            height="50"
+                                            />
+                                            <strong className="me-auto">Nope...</strong>
+                                        </Toast.Header>
+                                        <Toast.Body className="ml-2">
+                                            Try another question.
+                                        </Toast.Body>
+                                    </Toast>
+                                    <Toast 
+                                        onClose={() => setShowSuccessToast(false)} 
+                                        show={showSuccessToast} 
+                                        delay={1000} 
+                                        bg="success"
+                                        autohide
+                                        >
+                                        <Toast.Header>
+                                            <img
+                                            src="kick.png"
+                                            className="rounded me-2"
+                                            alt=""
+                                            width="100"
+                                            height="50"
+                                            />
+                                            <strong className="me-auto">Hell yeah!</strong>
+                                        </Toast.Header>
+                                        <Toast.Body className="ml-2">
+                                            Good job.
+                                        </Toast.Body>
+                                    </Toast>
+                                    </ToastContainer>
+                                        <CounterWrapper>Question {selectedIndex + 1} / {numberOfQuestions}</CounterWrapper>
+                                        <Question
+                                            individualQuestion={pickedQuestions[selectedIndex] || {}}
+                                            answerClicked={answerClicked} />
+                                </div>
                                 : <div className="center"> 
                                     <h1 className="mb-4">Quiz finished - correct answers {rightAnswers}/{numberOfQuestions}</h1>
                                     <Button 
