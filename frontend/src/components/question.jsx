@@ -14,9 +14,8 @@ const QuestionWrapper = styled.div`
 `;
 
 export default function Question ({individualQuestion, answerClicked}) {
-    console.log({individualQuestion})
     return (
-        <div>
+        <div className="p-4">
             <h2 className="mt-4">
                 { individualQuestion.question }
             </h2>

@@ -3,10 +3,27 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AppHeader from "../components/app-header";
-import StartButton from "../components/start-button";
+import { useRouter } from 'next/router';
+import { Button } from "react-bootstrap";
+import styled from "styled-components";
 
+
+const StartButtonsWrapper = styled.div`
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+`;
 
 export default function Home() {
+
+  const router = useRouter();
+
+  const handleGoToAdmin = () => {
+      router.push('/admin');
+  };
+  const handleStartGame = () => {
+    router.push('/game');
+};
 
   return (
     <>
@@ -18,7 +35,20 @@ export default function Home() {
       </Head>
       <main className="main center">
         <AppHeader />
-        <StartButton />
+        <StartButtonsWrapper>
+        <Button 
+          variant="info"
+          onClick={handleStartGame}
+          className="buttonMinWidth" >
+          Seijak 🥋
+        </Button>
+        <Button 
+          variant="warning"
+          onClick={handleGoToAdmin}
+          className="buttonMinWidth">
+          Admin
+        </Button>
+        </StartButtonsWrapper>
       </main>
     </>
   );

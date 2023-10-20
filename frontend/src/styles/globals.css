@@ -116,3 +116,12 @@ a {
 .center {
   text-align: center;
 }
+
+.buttonMinWidth {
+  min-width: 120px;
+}
+
+.danger {
+  color: red;
+  font-style: italic;
+}

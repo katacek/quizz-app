@@ -6,11 +6,19 @@ import styled from "styled-components";
 
 import Question from "../components/question";
 import callBackend from "../helpers";
+import { useRouter } from 'next/router';
 
 
 const CounterWrapper = styled.div`
     display: flex;
     flex-direction: row-reverse;
+    padding: 1.5rem;
+`;
+
+//  TODO: to helpers
+export const GameButtonsWrapper = styled.div`
+    display: flex;
+    justify-content: space-around;
 `;
 
 export default function Game() {
@@ -23,6 +31,12 @@ export default function Game() {
     const [showSuccessToast, setShowSuccessToast] = useState(false);
 
     const numberOfQuestions = 5;
+
+    const router = useRouter();
+
+    const handleReturnHome = () => {
+        router.push('/');
+    };
 
     // get questions from db
     useEffect(()=> {
@@ -148,13 +162,22 @@ export default function Game() {
                                             individualQuestion={pickedQuestions[selectedIndex] || {}}
                                             answerClicked={answerClicked} />
                                 </div>
-                                : <div className="center"> 
+                                : <div className="center p-2"> 
                                     <h1 className="mb-4">Quiz finished - correct answers {rightAnswers}/{numberOfQuestions}</h1>
-                                    <Button 
-                                        onClick={newQuiz}
-                                        variant="success">
-                                        Play again!
-                                    </Button>
+                                    <GameButtonsWrapper>
+                                        <Button 
+                                            onClick={newQuiz}
+                                            variant="success"
+                                            className="buttonMinWidth">
+                                            Play again!
+                                        </Button>
+                                        <Button 
+                                            variant="secondary"
+                                            onClick={handleReturnHome}
+                                            className="buttonMinWidth">
+                                            Bahro 🙇
+                                        </Button>
+                                    </GameButtonsWrapper>
                                 </div>
                             }
                         </div>
