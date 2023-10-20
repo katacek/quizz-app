@@ -117,7 +117,7 @@ export default function Game() {
                                     <Toast 
                                         onClose={() => setShowErrorToast(false)} 
                                         show={showErrorToast} 
-                                        delay={1000} 
+                                        delay={3000} 
                                         bg="danger"
                                         autohide
                                         >
@@ -138,7 +138,7 @@ export default function Game() {
                                     <Toast 
                                         onClose={() => setShowSuccessToast(false)} 
                                         show={showSuccessToast} 
-                                        delay={1000} 
+                                        delay={3000} 
                                         bg="success"
                                         autohide
                                         >

@@ -73,7 +73,7 @@ return (
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="badAnswer2">
-                <Form.Label>Wrong answer 1</Form.Label>
+                <Form.Label>Wrong answer 2</Form.Label>
                 <Form.Control 
                     type="text" 
                     placeholder="Another wrong answer is.." 
@@ -82,7 +82,7 @@ return (
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="badAnswer3">
-                <Form.Label>Wrong answer 1</Form.Label>
+                <Form.Label>Wrong answer 3</Form.Label>
                 <Form.Control 
                     type="text" 
                     placeholder="And another wrong answer is.." 
